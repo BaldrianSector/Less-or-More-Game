@@ -18,6 +18,8 @@ export default {
 
       random1 : 0,
       random2 : 0,
+
+      highscore: 0,
     }
   },
 
@@ -29,6 +31,11 @@ export default {
     handleClick(clickedValue, otherValue) {
       if (clickedValue > otherValue) {
         this.count++;
+        
+        // Update highscore if current score is higher
+        if (this.count > this.highscore) {
+          this.highscore = this.count;
+        }
       } else {
         this.count = 0;
       }
@@ -58,7 +65,7 @@ export default {
 </script>
 
 <template>
-  <!-- <ComponentHeader class="fixed w-screen px-5 py-2"></ComponentHeader> -->
+  <ComponentHeader class="fixed w-screen px-5 py-2">{{ highscore }}</ComponentHeader>
   
   <div class="flex h-screen bg-gradient-to-b from-sky-500 to-indigo-700 text-white flex-col justify-evenly">  
     

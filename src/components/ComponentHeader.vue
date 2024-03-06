@@ -7,9 +7,9 @@ export default {
 <template>
 
     <div class="flex justify-between text-white">
-        <p class="">1</p>
-        <p class="">2</p>
-        <p class="">3</p>
+        <p class=""></p>
+        <p class=""></p>
+        <p class="">Highscore: <slot></slot></p>
     </div>
 
 </template>
