@@ -94,7 +94,7 @@ export default {
   <div class="flex h-screen bg-gradient-to-b from-sky-500 to-indigo-700 text-white flex-col justify-evenly">  
     
     <div id="top-section" class="flex items-center justify-evenly">
-      <h1 class="text-2xl uppercase">Which one has the largest population?</h1>
+      <h1 class="text-[2rem] uppercase">Which one has the largest population?</h1>
     </div>
     
     <div id="mid-section" class="flex text-white items-center justify-evenly">
