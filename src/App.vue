@@ -9,9 +9,9 @@ export default {
   data() {
     return {
       count: 0,
-      timerDuration: 10000,  // Timer starts at 10000 milliseconds (10 seconds)
+      timerDuration: 9999,  // Timer starts at 9999 milliseconds (10 seconds)
       timer: null,
-      timeLeft: 10,  // Time left in seconds
+      timeLeft: 9.99,  // Time left in seconds, initialized to show two decimals
       
       valueList: countryValues,
       unsplashImages: unsplashImages,
@@ -41,12 +41,12 @@ export default {
           this.highscore = this.count;
           this.saveHighScore();
         }
-        // Decrease timer duration by 10% each click, but not less than 1 second
+        // Decrease timer duration by 5% each click, but not less than 1 second
         this.timerDuration = Math.max(1000, this.timerDuration * 0.95);
         this.resetTimer();
       } else {
         this.count = 0;
-        this.timerDuration = 10000; // Reset duration to 10 seconds when the score resets
+        this.timerDuration = 9999; // Reset duration to 10 seconds when the score resets
         this.resetTimer();
       }
       this.generateRandomNumbers();
@@ -55,14 +55,14 @@ export default {
     startTimer() {
       this.timer = setInterval(() => {
         if (this.timeLeft > 0) {
-          this.timeLeft--;
+          this.timeLeft -= 0.01;
         } else {
           this.count = 0;  // Reset score if timer reaches 0
-          this.timerDuration = 10000;  // Reset timer duration to 10 seconds
+          this.timerDuration = 9999;  // Reset timer duration to 10 seconds
           this.generateRandomNumbers();
           this.resetTimer();
         }
-      }, 1000);  // Update every second
+      }, 10);  // Update every 10 milliseconds
     },
 
     resetTimer() {
@@ -121,6 +121,7 @@ export default {
 }
 </script>
 
+
 <template>
   <ComponentHeader class="fixed w-screen px-5 py-2">{{ highscore }}</ComponentHeader>
   
@@ -141,13 +142,17 @@ export default {
     <div id="bottom-section" class="flex flex-col items-center justify-evenly">
       <h1 class="text-xl">Current Score: {{ count }}</h1>
       <!-- Display the countdown timer here -->
-      <h2 class="text-xl countdown">Time Remaining: <span :class="timerColorClass">{{ timeLeft }} seconds</span></h2>
+      <h2 class="text-xl countdown">Time Remaining:  <span :class="timerColorClass"><span style="font-family: monospace">{{ timeLeft.toFixed(2) }}</span> seconds</span></h2>
     </div>
 
   </div>
 </template>
 
 <style>
+.countdown { 
+  transition: color 1s;
+}
+
 /* Example CSS for class bindings */
 .text-red-800 { color: #e53e3e; } /* Tailwind color for dark red */
 .text-red-600 { color: #fc8181; } /* Tailwind color for medium red */
