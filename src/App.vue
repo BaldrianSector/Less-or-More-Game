@@ -40,37 +40,45 @@ export default {
   },
 
   mounted() {
+    this.loadHighScore();
     this.generateRandomNumbers();
   },
 
   methods: {
-    handleClick(clickedValue, otherValue) {
-      if (clickedValue > otherValue) {
-        this.count++;
-        
-        // Update highscore if current score is higher
-        if (this.count > this.highscore) {
-          this.highscore = this.count;
-        }
-      } else {
-        this.count = 0;
-      }
-      this.generateRandomNumbers();
-    },
-    
-    generateRandomNumbers() {
-      let previousRandom1 = this.random1;
-      let previousRandom2 = this.random2;
+        handleClick(clickedValue, otherValue) {
+            if (clickedValue > otherValue) {
+                this.count++;
+                if (this.count > this.highscore) {
+                    this.highscore = this.count;
+                    this.saveHighScore();
+                }
+            } else {
+                this.count = 0;
+            }
+            this.generateRandomNumbers();
+        },
 
-      // Generate random indices for the countries
-      while (this.random1 === this.random2 || this.random1 === previousRandom1 || this.random2 === previousRandom2) {
-        this.random1 = Math.floor(Math.random() * this.valueList.length);
-        this.random2 = Math.floor(Math.random() * this.valueList.length);
-      }
+        generateRandomNumbers() {
+            let previousRandom1 = this.random1;
+            let previousRandom2 = this.random2;
+            while (this.random1 === this.random2 || this.random1 === previousRandom1 || this.random2 === previousRandom2) {
+                this.random1 = Math.floor(Math.random() * this.valueList.length);
+                this.random2 = Math.floor(Math.random() * this.valueList.length);
+            }
+            console.log(this.random1, this.random2);
+        },
 
-      console.log(this.random1, this.random2);
+        loadHighScore() {
+            if (localStorage.getItem('highscore')) {
+                this.highscore = parseInt(localStorage.getItem('highscore'));
+            }
+        },
+
+        saveHighScore() {
+            localStorage.setItem('highscore', this.highscore.toString());
+        },
     },
-  },
+
 
   components: {
     ComponentHeader,  
