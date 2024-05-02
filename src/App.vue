@@ -20,10 +20,12 @@ export default {
       highscore: 0,
     }
   },
+  created() {
+    this.assignImages();
+  },
 
   mounted() {
     this.loadHighScore();
-    this.assignImages();
     this.generateRandomNumbers();
   },
 
